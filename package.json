@@ -1,5 +1,5 @@
 {
-  "name": "ngx-treeview",
+  "name": "@creately/ngx-treeview",
   "version": "6.0.2",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
