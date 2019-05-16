@@ -12,7 +12,7 @@
     "prebuild": "rimraf tmp dist",
     "build": "gulp inline-templates && ngc -p tsconfig-lib.json && copyfiles package.json README.md LICENSE dist",
     "postbuild": "rimraf tmp",
-    "pub": "npm run build && npm publish dist",
+    "pub": "npm run build && npm publish dist --access=public",
     "predeploy": "rimraf dist",
     "deploy": "ng build --prod --base-href /ngx-treeview/ && node gh-pages.js"
   },
