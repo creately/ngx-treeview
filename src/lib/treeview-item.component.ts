@@ -13,7 +13,7 @@ export class TreeviewItemComponent {
     @Input() config: TreeviewConfig;
     @Input() template: TemplateRef<TreeviewItemTemplateContext>;
     @Input() item: TreeviewItem;
-    @Output() checkedChange = new EventEmitter<boolean>();
+    @Output() checkedChange = new EventEmitter<{value: number, isChecked: boolean}>();
 
     constructor(
         private defaultConfig: TreeviewConfig
@@ -30,10 +30,10 @@ export class TreeviewItemComponent {
         if (!isNil(this.item.children) && !this.config.decoupleChildFromParent) {
             this.item.children.forEach(child => child.setCheckedRecursive(checked));
         }
-        this.checkedChange.emit(checked);
+        this.checkedChange.emit({value: this.item.value, isChecked: checked});
     }
 
-    onChildCheckedChange(child: TreeviewItem, checked: boolean) {
+    onChildCheckedChange(child: TreeviewItem, checkedItem: any) {
         if (!this.config.decoupleChildFromParent) {
             let itemChecked: boolean = null;
             for (const childItem of this.item.children) {
@@ -55,6 +55,6 @@ export class TreeviewItemComponent {
 
         }
 
-        this.checkedChange.emit(checked);
+        this.checkedChange.emit(checkedItem);
     }
 }

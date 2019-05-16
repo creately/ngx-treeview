@@ -113,19 +113,32 @@ export class TreeviewComponent implements OnChanges {
         this.raiseSelectedChange();
     }
 
-    onItemCheckedChange(item: TreeviewItem, checked: boolean) {
+    onItemCheckedChange(item: TreeviewItem, checkedItem: any) {
         if (item instanceof FilterTreeviewItem) {
             item.updateRefChecked();
         }
 
         this.updateCheckedOfAll();
         this.raiseSelectedChange();
+        this.recursiveSelectItems(item, checkedItem);
     }
 
     raiseSelectedChange() {
         this.generateSelection();
         const values = this.eventParser.getSelectedChange(this);
         this.selectedChange.emit(values);
+    }
+
+    private recursiveSelectItems(item: TreeviewItem, checkedItem: any) {
+        if(item.children) {
+            item.children.forEach(child => {
+                this.recursiveSelectItems(child, checkedItem);
+            });
+        } else {
+            if(item.value === checkedItem.value) {
+                item.checked = checkedItem.isChecked;
+            }
+        }
     }
 
     private createHeaderTemplateContext() {

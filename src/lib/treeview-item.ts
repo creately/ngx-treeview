@@ -112,11 +112,11 @@ export class TreeviewItem {
         }
     }
 
-    get children(): TreeviewItem[] {
+    public get children(): TreeviewItem[] {
         return this.internalChildren;
     }
 
-    set children(value: TreeviewItem[]) {
+    public set children(value: TreeviewItem[]) {
         if (this.internalChildren !== value) {
             if (!isNil(value) && value.length === 0) {
                 throw new Error('Children must be not an empty array');
