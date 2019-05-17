@@ -120,7 +120,9 @@ export class TreeviewComponent implements OnChanges {
 
         this.updateCheckedOfAll();
         this.raiseSelectedChange();
-        this.recursiveSelectItems(item, checkedItem);
+        this.items.forEach(innerItem => {
+            this.recursiveCheckItems(innerItem, checkedItem);
+        });
     }
 
     raiseSelectedChange() {
@@ -129,10 +131,10 @@ export class TreeviewComponent implements OnChanges {
         this.selectedChange.emit(values);
     }
 
-    private recursiveSelectItems(item: TreeviewItem, checkedItem: any) {
+    private recursiveCheckItems(item: TreeviewItem, checkedItem: any) {
         if(item.children) {
             item.children.forEach(child => {
-                this.recursiveSelectItems(child, checkedItem);
+                this.recursiveCheckItems(child, checkedItem);
             });
         } else {
             if(item.value === checkedItem.value) {

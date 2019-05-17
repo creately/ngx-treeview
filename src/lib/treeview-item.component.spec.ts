@@ -11,12 +11,12 @@ import { fakeItemTemplate } from './treeview-item-template.spec';
 
 interface FakeData {
     item: TreeviewItem;
-    checkedChange(checked: boolean): void;
+    checkedChange({value: number, isChecked: boolean}): void;
 }
 
 const fakeData: FakeData = {
     item: undefined,
-    checkedChange(checked: boolean) { }
+    checkedChange({value: number, isChecked: boolean}) { }
 };
 
 const testTemplate = fakeItemTemplate
@@ -28,7 +28,7 @@ const testTemplate = fakeItemTemplate
 })
 class TestComponent {
     item = fakeData.item;
-    checkedChange = (checked: boolean) => fakeData.checkedChange(checked);
+    checkedChange = ({value: number, isChecked: boolean}) => fakeData.checkedChange({value: number, isChecked: boolean});
 }
 
 const createTestComponent = (html: string) =>
@@ -149,7 +149,7 @@ describe('TreeviewItemComponent', () => {
             it('should raise event checkedChange', () => {
                 expect(spy.calls.count()).toBe(1);
                 const args = spy.calls.mostRecent().args;
-                expect(args[0]).toBeFalsy();
+                expect(args[0].isChecked).toBeFalsy();
             });
         });
 
@@ -170,7 +170,7 @@ describe('TreeviewItemComponent', () => {
             it('should raise event checkedChange', () => {
                 expect(spy.calls.count()).toBe(1);
                 const args = spy.calls.mostRecent().args;
-                expect(args[0]).toBeFalsy();
+                expect(args[0].isChecked).toBeFalsy();
             });
 
             describe('un-check "Child 2"', () => {
@@ -188,7 +188,7 @@ describe('TreeviewItemComponent', () => {
                 it('should raise event checkedChange', () => {
                     expect(spy.calls.count()).toBe(1);
                     const args = spy.calls.mostRecent().args;
-                    expect(args[0]).toBeFalsy();
+                    expect(args[0].isChecked).toBeFalsy();
                 });
             });
 
