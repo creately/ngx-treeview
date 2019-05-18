@@ -5,7 +5,7 @@
     <div class="form-check">
       <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()"
         [disabled]="item.disabled" [indeterminate]="item.indeterminate" />
-      <label class="form-check-label" (click)="item.checked = !item.checked; onCollapseExpand()">
+      <label class="form-check-label" (click)="!item.disableItemCheck && (item.checked = !item.checked); !item.disableChildrenCheck && onCheckedChange(); onCollapseExpand()">
         {{item.text}}
       </label>
     </div>
