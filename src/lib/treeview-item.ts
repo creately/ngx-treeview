@@ -13,6 +13,10 @@ export interface TreeItem {
     checked?: boolean;
     collapsed?: boolean;
     children?: TreeItem[];
+    // To disable children node being checked or unchecked
+    disableChildrenCheck?: boolean;
+    // To disable node itself being checked or unchecked
+    disableItemCheck?: boolean;
 }
 
 export class TreeviewItem {
@@ -22,6 +26,8 @@ export class TreeviewItem {
     private internalChildren: TreeviewItem[];
     text: string;
     value: any;
+    disableChildrenCheck = false;
+    disableItemCheck = false;
 
     constructor(item: TreeItem, autoCorrectChecked = false) {
         if (isNil(item)) {
@@ -54,6 +60,12 @@ export class TreeviewItem {
 
         if (autoCorrectChecked) {
             this.correctChecked();
+        }
+        if (isBoolean(item.disableChildrenCheck)) {
+            this.disableChildrenCheck = item.disableChildrenCheck;
+        }
+        if (isBoolean(item.disableItemCheck)) {
+            this.disableItemCheck = item.disableItemCheck;
         }
     }
 

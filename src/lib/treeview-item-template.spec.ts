@@ -5,7 +5,8 @@ export const fakeItemTemplate = `
     <div class="form-check">
         <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true"
             class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>
-        <label class="form-check-label">
+        <label class="form-check-label" (titleClick)="!item.disableItemCheck && (item.checked = !item.checked);
+        !item.disableChildrenCheck && onCheckedChange(); onCollapseExpand()">
             <input type="checkbox" class="form-check-input"
                 [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled" />
             {{item.text}}

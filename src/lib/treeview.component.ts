@@ -132,12 +132,12 @@ export class TreeviewComponent implements OnChanges {
     }
 
     private recursiveCheckItems(item: TreeviewItem, checkedItem: any) {
-        if(item.children) {
+        if (item.children) {
             item.children.forEach(child => {
                 this.recursiveCheckItems(child, checkedItem);
             });
         } else {
-            if(item.value === checkedItem.value) {
+            if ( item.value === checkedItem.value) {
                 item.checked = checkedItem.isChecked;
             }
         }

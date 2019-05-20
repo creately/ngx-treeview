@@ -77,6 +77,7 @@ describe('TreeviewItemComponent', () => {
         let collapsedElement: DebugElement;
         let parentCheckbox: DebugElement;
         let childrenCheckboxes: DebugElement[];
+        let collapsedElementTitle: DebugElement;
 
         beforeEach(() => {
             fakeData.item = new TreeviewItem({
@@ -85,6 +86,7 @@ describe('TreeviewItemComponent', () => {
                 checked: true,
                 collapsed: false,
                 disabled: false,
+                disableChildrenCheck: true,
                 children: [
                     { text: 'Child 1', value: 11 },
                     { text: 'Child 2', value: 12 }
@@ -97,6 +99,7 @@ describe('TreeviewItemComponent', () => {
             fixture.detectChanges();
             tick();
             collapsedElement = fixture.debugElement.query(By.css('.fa'));
+            collapsedElementTitle = fixture.debugElement.query(By.css('.form-check-label'));
             const checkboxElements = fixture.debugElement.queryAll(By.css('.form-check-input'));
             parentCheckbox = checkboxElements[0];
             childrenCheckboxes = slice(checkboxElements, 1);
@@ -129,6 +132,23 @@ describe('TreeviewItemComponent', () => {
             it('should not render children', () => {
                 const checkboxElements = fixture.debugElement.queryAll(By.css('.form-check-input'));
                 expect(checkboxElements.length).toBe(1);
+            });
+        });
+
+        describe('toggle collapse/expand from title', () => {
+            let spy: jasmine.Spy;
+
+            beforeEach(fakeAsync(() => {
+                spy = spyOn(fakeData, 'checkedChange');
+                collapsedElementTitle.nativeElement.click();
+                fixture.detectChanges();
+                tick();
+            }));
+
+            it('should invoke onCollapseExpand to change value of collapsed', () => {
+                expect(collapsedElement.nativeElement).toHaveCssClass('fa-caret-down');
+                expect(parentCheckbox.nativeElement.checked).toEqual(false);
+                expect(childrenCheckboxes.map(element => element.nativeElement.checked)).toEqual([false, false]);
             });
         });
 
