@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges, TemplateRef } from '@angular/core';
-import { isNil, includes } from 'lodash';
+import { isNil, includes, uniq } from 'lodash';
 import { TreeviewI18n } from './treeview-i18n';
 import { TreeviewItem, TreeviewSelection } from './treeview-item';
 import { TreeviewConfig } from './treeview-config';
@@ -118,11 +118,11 @@ export class TreeviewComponent implements OnChanges {
             item.updateRefChecked();
         }
 
-        this.updateCheckedOfAll();
-        this.raiseSelectedChange();
         this.items.forEach(innerItem => {
             this.recursiveCheckItems(innerItem, checkedItem);
         });
+        this.updateCheckedOfAll();
+        this.raiseSelectedChange();
     }
 
     raiseSelectedChange() {
