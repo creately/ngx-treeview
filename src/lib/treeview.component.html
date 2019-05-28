@@ -2,12 +2,13 @@
   <div class="form-inline row-item">
     <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
       [class.fa-caret-down]="!item.collapsed"></i>
-    <div class="form-check">
+    <div class="form-check form-input-wrapper">
       <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()"
         [disabled]="item.disabled" [indeterminate]="item.indeterminate" />
-      <label class="form-check-label" (click)="!item.disableItemCheck && (item.checked = !item.checked); !item.disableChildrenCheck && onCheckedChange(); onCollapseExpand()">
-        {{item.text}}
-      </label>
+        <span class="form-custom-checkbox"></span>
+        <label class="form-check-label" (click)="!item.disableItemCheck && (item.checked = !item.checked); !item.disableChildrenCheck && onCheckedChange(); onCollapseExpand()">
+          {{item.text}}
+        </label>
     </div>
   </div>
 </ng-template>
