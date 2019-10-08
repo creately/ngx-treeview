@@ -31,8 +31,10 @@
           </label>
         </div>
         <label *ngIf="config.hasCollapseExpand" class="pull-right form-check-label" (click)="onCollapseExpand()">
-          <i [title]="i18n.getTooltipCollapseExpandText(item.collapsed)" aria-hidden="true" class="fa"
-            [class.fa-expand]="item.collapsed" [class.fa-compress]="!item.collapsed"></i>
+          <i [title]="i18n.getTooltipCollapseExpandText(item.collapsed)" aria-hidden="true" class="fa treeview-arrow"
+            [class.fa-expand]="item.collapsed" [class.fa-compress]="!item.collapsed">
+            <img src="./assets/images/decoratives/expand-arrow.svg" width="18">
+          </i>
         </label>
       </div>
     </div>
