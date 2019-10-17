@@ -42,3 +42,11 @@
     transform: rotate(-90deg);
   }
 }
+
+.form-custom-checkbox-tick {
+  display: none;
+}
+
+.form-check input:checked ~ .form-custom-checkbox .form-custom-checkbox-tick {
+  display: block;
+}

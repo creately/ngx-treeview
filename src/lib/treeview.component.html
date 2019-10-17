@@ -8,7 +8,9 @@
     <div class="form-check form-input-wrapper">
       <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()"
         [disabled]="item.disabled" [indeterminate]="item.indeterminate" />
-        <span class="form-custom-checkbox"></span>
+        <span class="form-custom-checkbox">
+          <img class="form-custom-checkbox-tick" src="./assets/images/decoratives/tick.svg" width="18">
+        </span>
         <label class="form-check-label" (click)="!item.disableItemCheck && (item.checked = !item.checked); !item.disableChildrenCheck && onCheckedChange(); onCollapseExpand()">
           {{item.text}}
         </label>
